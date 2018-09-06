@@ -1,14 +1,13 @@
-require_relative 'config/environment'
+require 'sinatra/base'
 
 class App < Sinatra::Base
 
-  get '/food_form' do
-    erb :food_form
+  get '/newteam' do
+    erb :newteam
   end
 
-  # Add your post route and action below
-  post '/food' do
-    "My name is #{params[:name]}, and I love #{params[:favorite_food]}"
+  post '/team' do
+    erb :team
   end
 
 end
