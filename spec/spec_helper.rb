@@ -1,19 +1,19 @@
-require_relative '../config/environment.rb'
+ENV["SINATRA_ENV"] = "test"
+require_relative '../config/environment'
 require 'rack/test'
-RACK_ENV = "test"
-ENV["RACK_ENV"] = "test"
+require 'capybara/rspec'
 require 'capybara/dsl'
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include Capybara::DSL
-  config.run_all_when_everything_filtered = true
-  config.filter_run :focus
   config.include Rack::Test::Methods
-
   config.order = 'default'
 end
 
 def app
   Rack::Builder.parse_file('config.ru').first
 end
+
 Capybara.app = app
